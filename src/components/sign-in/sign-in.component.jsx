@@ -17,7 +17,7 @@ class SignIn extends React.Component {
             email: '',
             password: ''
 
-        }
+        };
 
     }
 
@@ -38,14 +38,14 @@ class SignIn extends React.Component {
             
         }
 
-    }
+    };
 
     handleChange = event => {
         const { value, name } = event.target; //event.target will be input element itself. In this case it will be email and password fields
 
-        this.setState({ [name]: value })  //If the user is entering pass then name will be password and value will be whatever he types.
+        this.setState({ [name]: value });  //If the user is entering pass then name will be password and value will be whatever he types.
 
-    }
+    };
 
     render() {
 
