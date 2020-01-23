@@ -6,12 +6,18 @@ import './App.css';
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import CheckoutPage from '../src/pages/checkout/checkout.component';
+
 import Header from './components/header/header.component';
+
 import { setCurrentUser } from './redux/user/user.actions';
+import { auth, createUserProfileDocument } from './components/firebase/firebase.utils';
+import { selectCurrentUser } from './redux/user/user.selectors';
+import { createStructuredSelector } from 'reselect';
 
 //adding Header before Switch(in render method) React makes header component visible and rendered all the time even if Switch and Route renders different pages
 
-import { auth, createUserProfileDocument } from './components/firebase/firebase.utils';
+
 
 
 class App extends React.Component {
@@ -57,6 +63,7 @@ class App extends React.Component {
             <Switch>
               <Route exact path='/' component={HomePage} />
               <Route path='/shop' component={ShopPage} />
+              <Route exact path='/checkout' component={CheckoutPage} />
               <Route exact path='/signin' render={() => this.props.currentUser ? (<Redirect to ='/' />) : (<SignInAndSignUpPage />)} />
             </Switch>
           </div>
@@ -66,8 +73,8 @@ class App extends React.Component {
 
     }
 
-const mapStateToProps = ({ user}) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({
